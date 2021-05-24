@@ -1,52 +1,35 @@
 ---
-bio: My research interests include distributed robotics, mobile computing and programmable
-  matter.
 education:
   courses:
-  - course: PhD in Artificial Intelligence
-    institution: Stanford University
-    year: 2012
-  - course: MEng in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2009
-  - course: BSc in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2008
+  - course: BA in Statistics and Computer Science
+    institution: Macalester College
+    year: 2020-2023
+  - course: BA
+    institution: Saint Olaf College
+    year: 2019-2020
+    
 email: ""
 highlight_name: false
-interests:
-- Artificial Intelligence
-- Computational Linguistics
-- Information Retrieval
+
 organizations:
-- name: Stanford University
-  url: https://www.stanford.edu/
-role: Professor of Artificial Intelligence
+- name: Macalester College
+  url: https://www.macalester.edu/
 social:
 - icon: envelope
   icon_pack: fas
   link: /#contact
 - display:
     header: true
-  icon: twitter
-  icon_pack: fab
-  label: Follow me on Twitter
-  link: https://twitter.com/GeorgeCushen
-- icon: graduation-cap
-  icon_pack: fas
-  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
 - icon: github
   icon_pack: fab
-  link: https://github.com/gcushen
+  link: https://github.com/JiayingWu-work
 - icon: linkedin
   icon_pack: fab
-  link: https://www.linkedin.com/
+  link: https://linkedin.com/in/jiaying-wu-work
 superuser: true
 title: Jiaying Wu
 ---
+I’m a junior at Macalester College with double majors in statistics and computer science. This summer, I am analyzing the Minneapolis Institute of Art’s collection data with Professor Brianna C. Heggeseth from Macalester College. We are working on visualizing the culture and nationality data for Mia, and matching the exhibitions and objects' data for future metadata.
 
-Nelson Bighetti is a professor of artificial intelligence at the Stanford AI Lab. His research interests include distributed robotics, mobile computing and programmable matter. He leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "media/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.

@@ -22,28 +22,28 @@ date_format: Jan 2006
 #   Leave `date_end` empty if it's your current employer.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 experience:
-  - title: CEO
-    company: GenCoin
-    company_url: ''
-    company_logo: org-gc
-    location: California
-    date_start: '2021-01-01'
+  - title: Data Analyst
+    company: Minneapolis Institute of Art
+    company_url: 'https://new.artsmia.org/'
+    company_logo: org-x
+    location: Minneapolis, MN
+    date_start: '2021-05-17'
     date_end: ''
     description: |2-
         Responsibilities include:
         
-        * Analysing
-        * Modelling
-        * Deploying
+        * Data Analysis
+        * Data Visualization
+        * Data Connection
         
-  - title: Professor of Semiconductor Physics
-    company: University X
-    company_url: ''
+  - title: Teaching Assistant for Epidemiology Statistics
+    company: Macalester College
+    company_url: 'https://www.macalester.edu/'
     company_logo: org-x
-    location: California
-    date_start: '2016-01-01'
-    date_end: '2020-12-31'
-    description: Taught electronic engineering and researched semiconductor physics.
+    location: Saint Paul, MN
+    date_start: '2020-10-01'
+    date_end: '2020-12-01'
+    description: Tutored 30+ students with course-related problems, including measurement of disease, health and analysis of risk using techniques in statistics epidemiology.
 
 design:
   columns: '2'
