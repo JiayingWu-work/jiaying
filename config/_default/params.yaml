@@ -5,7 +5,7 @@
 
 # Appearance
 
-theme: rose 
+theme: rose
 day_night: true
 font: ''
 font_size: L
@@ -21,6 +21,7 @@ twitter: ''
 # Contact (edit or remove options as required)
 
 email: jwu4@macalester.edu
+phone: 507-581-7248
 address:
   street: 1600 Grand Ave
   city: St Paul

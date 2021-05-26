@@ -1,7 +1,7 @@
 ---
 education:
   courses:
-  - course: BA in Statistics and Computer Science
+  - course: BA in Statistics & Computer Science
     institution: Macalester College
     year: 2020-2023
   - course: BA

@@ -25,7 +25,6 @@ experience:
   - title: Data Analyst
     company: Minneapolis Institute of Art
     company_url: 'https://new.artsmia.org/'
-    company_logo: org-x
     location: Minneapolis, MN
     date_start: '2021-05-17'
     date_end: ''
@@ -34,12 +33,11 @@ experience:
         
         * Data Analysis
         * Data Visualization
-        * Data Connection
+        * Update & matching data 
         
   - title: Teaching Assistant for Epidemiology Statistics
     company: Macalester College
     company_url: 'https://www.macalester.edu/'
-    company_logo: org-x
     location: Saint Paul, MN
     date_start: '2020-10-01'
     date_end: '2020-12-01'
