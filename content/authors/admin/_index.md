@@ -32,4 +32,4 @@ title: Jiaying Wu
 I’m a junior at Macalester College with double majors in statistics and computer science. This summer, I am analyzing the Minneapolis Institute of Art’s collection data with Professor Brianna C. Heggeseth from Macalester College. We are working on visualizing the culture and nationality data for Mia, and matching the exhibitions and objects' data for future metadata.
 
 
-{{< icon name="download" pack="fas" >}} Download my {{< staticref "media/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
+{{< icon name="download" pack="fas" >}} Download my {{< staticref "media/Jiaying_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
