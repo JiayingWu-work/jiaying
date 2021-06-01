@@ -6,7 +6,7 @@
 
 title: "Jiaying Wu" # Website name
 baseurl: 'https://jiayingwu.netlify.app' # Website URL
-copyright: '' # Footer text, e.g. '© {year} Me'
+copyright: '&copy; {year} Jiaying Wu' # Footer text, e.g. '© {year} Me'
 
 ############################
 ## LANGUAGE
