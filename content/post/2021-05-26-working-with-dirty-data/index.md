@@ -12,7 +12,7 @@ subtitle: ''
 summary: 'Use r package `stringr` clean dirty data to make comparison and matching'
 featured: no
 image:
-  caption: ''
+  caption: 'Image credit:(https://unsplash.com/photos/Skf7HxARcoc)'
   focal_point: ''
   preview_only: no
 projects: []
