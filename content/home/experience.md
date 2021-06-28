@@ -31,9 +31,9 @@ experience:
     description: |2-
         Responsibilities include:
         
-        * Data Analysis
-        * Data Visualization
-        * Update & matching data 
+        * Data cleaning
+        * Data analysis & visualization
+        * Link history data with current exhibition records and API records
         
   - title: Teaching Assistant for Epidemiology Statistics
     company: Macalester College

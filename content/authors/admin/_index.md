@@ -1,14 +1,17 @@
 ---
 education:
   courses:
-  - course: BA in Statistics & Computer Science
-    institution: Macalester College
+  - course: B.A. in Computer Science & Statistics
+    institution: Macalester College, U.S.
     year: 2020-2023
-  - course: BA
-    institution: Saint Olaf College
+  - course: B.A.
+    institution: Saint Olaf College, U.S.
     year: 2019-2020
+  - course: IB diploma
+    institution: United World College, Armenia
+    year: 2017-2019
     
-email: ""
+email: "jwu4@macalester.edu"
 highlight_name: false
 
 organizations:
@@ -29,7 +32,12 @@ social:
 superuser: true
 title: Jiaying Wu
 ---
-I’m a junior at Macalester College with double majors in statistics and computer science. This summer, I am analyzing the Minneapolis Institute of Art’s collection data with Professor Brianna C. Heggeseth from Macalester College. We are working on visualizing the culture and nationality data for Mia, and matching the exhibitions and objects' data for future metadata.
+
+Welcome to my website! I’m a rising junior at Macalester College with double majors in statistics and computer science. My most recent work has focused on data analysis and visualizations, but I enjoy exploring all levels of work in data science fields.
+
+This summer, I am working on the Minneapolis Institute of Art’s collection data with [Professor Brianna C. Heggeseth](https://bcheggeseth.github.io/) from Macalester College. We plan to clean parts of the Minneapolis Institute of Art’s metadata and complete the exhibition data linking/matching project. Also, we will make some visualizations of Mia’s metadata in a shiny app.
+
+Outside of academics interests, I am passionate about cooking, nutrition and health. I have been working on building a healthy relationship with food since the pandemic, and explore potentials in blending traditional Suzhou cuisine (my hometown) with food all around the world.
 
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "media/Jiaying_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
