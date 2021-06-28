@@ -1,0 +1,159 @@
+---
+title: "Visualization for Collection Goals"
+author: "Jiaying"
+date: '2021-06-16'
+slug: visualization-for-collection-goals
+diagram: yes
+highlight: yes
+math: yes
+categories: []
+tags: []
+subtitle: ''
+summary: thinking about the most efficient and sustainable way to evaluate Mia collection
+  plan goals
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+*Important notice: all examples I use in the post do not reflect Mia's actual plan but are for the sake of illustrating my learning and working process; all codes showing here are not the actual codes we use in shinyApp due to the confidentiality.*
+
+In September 2019, Mia wrote "Mia Collection Development Plan 2020" for 2020 and 2021. In this document, each department reviewed their current collection and made some goals for new collections for the next 2 years, especially focusing on some diverse classifications they would like to have. Now, it's June 2021, Mia starts to think about some ways they can sufficiently evaluate how their collection development goals have been achieved. 
+
+To quantitatively evaluate their progress, Prof. Brianna and I met with Mia's data team and talked about making visualizations for each department at Mia to check the growth or trend in their collections. We made pretty simple ones in the beginning to check if visualizations work better for them compared with traditional tabled data. 
+
+For example, as the graph shown below, to evaluate if department A has increased their certain material types' or object types' collections recently, we could generate one visualization like this:
+
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+library(ggplot2)
+library(dplyr) 
+library(stringr)
+library(lubridate)
+library(forcats)
+
+load("MIACleanFullData.RData")
+fullData <- SelectData
+
+department.AAA.2015.2020 <- 
+  fullData %>% 
+  filter(department == "Art of Africa and the Americas") %>% 
+  filter(AccessionISODate >= as.Date("2015-01-01"))
+```
+
+```
+department.A.2015.2020 %>% 
+  filter(Classification.X == TRUE | Classification.Y == TRUE) %>%
+  ggplot(mapping = aes(x = AccessionISODate, fill = continent)) + 
+  geom_histogram(binwidth = 50) +
+  theme_classic() 
+```
+
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+department.AAA.2015.2020 %>% 
+  filter(Classification.Accessories == TRUE | Classification.Woodwork == TRUE) %>%
+  ggplot(mapping = aes(x = AccessionISODate, fill = continent)) + 
+  geom_histogram(binwidth = 50) +
+  xlab("Accession Date") +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust = 1)) 
+```
+
+What if we would like to check data for another two classification types? Then we just simply change the filters in the code. Here we go again:
+
+```
+department.A.2015.2020 %>% 
+  filter(Classification.Z == TRUE | Classification.W == TRUE) %>%
+  ggplot(mapping = aes(x = AccessionISODate, fill = continent)) + 
+  geom_histogram(binwidth = 50) +
+  theme_classic() 
+```
+
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+department.AAA.2015.2020 %>% 
+  filter(Classification.Prints == TRUE | Classification.Paintings == TRUE) %>%
+  ggplot(mapping = aes(x = AccessionISODate, fill = continent)) + 
+  geom_histogram(binwidth = 50) +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust = 1)) +
+  xlab("Accession Date") 
+```
+
+The only difference between these two chunk of codes is this line: 
+
+```
+filter(Classification.X == TRUE | Classification.Y == TRUE) 
+filter(Classification.Z == TRUE | Classification.W == TRUE) 
+```
+
+All other codes are identical and we only need to change the classification type each time. After a couple trying, we realized that we are able to code a general function in R to easily change some filters without unnecessary repetitions, and the demo for the function look like this:
+
+
+```
+demoFunction <- function(StartDate,EndDate,Dept,Class){
+ 
+  fullData %>% 
+    filter(department == Dept) %>%
+    filter(AccessionISODate >= as.Date(StartDate), AccessionISODate <= as.Date(EndDate)) %>%
+    dplyr::filter(eval(parse(text=paste0(paste0('Classification.',str_replace_all(Class,' ','_')),collapse='|')) )) %>% 
+    ggplot(mapping = aes(x = AccessionISODate, fill = continent)) + 
+    geom_histogram(binwidth = as.numeric((as.Date(EndDate)-as.Date(StartDate))/30)) +  
+    scale_color_viridis_d() +
+    theme_classic()
+}
+
+demoFunction("2015-01-01","2020-01-01","A", c("X", "Y", "Z", "W"))
+```
+
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+Date.Classification.Continent <- function(StartDate,EndDate,Dept,Class){
+  
+  DEPT = case_when(Dept == 'AAA' ~ "Art of Africa and the Americas", 
+                   Dept == 'CA' ~ "Contemporary Art",
+                   Dept == 'CSSAA' ~ "Chinese, South and Southeast Asian Art",
+                   Dept == 'DATS' ~ "Decorative Arts, Textiles and Sculpture",
+                   Dept == 'JKA' ~ "Japanese and Korean Art",
+                   Dept == 'MAEP' ~ "Minnesota Artisblogts Exhibition Program",
+                   Dept == 'P' ~ "Paintings",
+                   Dept == 'PNM' ~ "Photography and New Media",
+                   Dept == 'PD' ~ "Prints and Drawings",
+                   Dept == 'T' ~ "Textiles")
+ 
+  fullData %>% 
+    filter(department == DEPT) %>%
+    filter(AccessionISODate >= as.Date(StartDate), AccessionISODate <= as.Date(EndDate)) %>%
+    dplyr::filter(eval(parse(text=paste0(paste0('Classification.',str_replace_all(Class,' ','_')),collapse='|')) )) %>% 
+    ggplot(mapping = aes(x = AccessionISODate, fill = continent)) + 
+    geom_histogram(binwidth = as.numeric((as.Date(EndDate)-as.Date(StartDate))/30)) +  
+    scale_color_viridis_d() +
+    theme_classic()
+}
+
+Date.Classification.Continent("2015-01-01","2020-01-01","AAA", c("Accessories","Woodwork", "Prints", "Paintings"))
+```
+
+It is still a function in process. But you got the idea. We are working on leaving more freedom to users to filter and choose the aspects they would like to focus on (color the graph). Hence, a Shiny App would be the best try.
+
+Wait a minute… Why? What is the pros and cons of allowing users to filter and color the graph? 
+
+First, some departments have very specific collection goals, for example, one department would like to check large-scale painting from Country T. To evaluate this goal, we need to include very specific "Dimensions + Classification + Country of origin" accession data for them. But there are a large number of specific goals. So making a shinyApp would allow each department to filter the date, classification, country, dimension, style... directly depending on their needs. And they could do it over and over again to narrow down the filtering range. 
+
+But most importantly, establishing the Shiny App and having recursive functions might be the starting point of making a sustainable way to evaluate Mia’s collection goals. Instead of rewriting the similar code over and over every 2 years or going through the metadata all the time, Mia only needs to simply update the database in the future. In the best scenario, establishing a sustainable and efficient web for data visualizations will help Mia in the long term.
+
+
+Now, I have made some progress in thinking about the need of clients:
+
+- [x] write functions when you see repetitive codes
+- [x] create user friendly visualization for non-data clients 
+- [x] start to think about sustainable visualization might be re-used in the future 
+
+I will update the process of creating Shiny App and improving the function soon!
+
+See you guys in the next post... 🙌
+
