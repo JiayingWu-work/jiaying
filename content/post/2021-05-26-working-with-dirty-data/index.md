@@ -12,17 +12,17 @@ subtitle: ''
 summary: 'Use r package `stringr` clean dirty data to make comparison and matching'
 featured: no
 image:
-  caption: 'Image credit:(https://unsplash.com/photos/Skf7HxARcoc)'
+  caption: ''
   focal_point: ''
   preview_only: no
 projects: []
 ---
 
-In summer of 2021, I have started to work at the public available collection data of Minneapolis Institute of Art with Professor Brianna c. Heggeseth. Unlike doing projects in classes, the history data we have are not clean. Many strings do not have the exhibition location, dates, and objects ID not in order. And we have found so many ways staff used to keep track of the exhibitions' dates. 
+In the summer of 2021, I have started to work at the public available collection data of the Minneapolis Institute of Art with Professor Brianna c. Heggeseth. Unlike doing projects in classes, the history data we have are not clean. Many strings do not have the exhibition location, dates, and objects ID, not in order. And we have found so many ways staff used to keep track of the exhibitions' dates. 
 
-While working on an api matching project, I learn a few tips about working with dirty data, especially on working with dirty strings within a data frame. And I will share them here!
+While working on an API matching project, I learn a few tips about working with dirty data, especially on working with dirty strings within a data frame. And I will share them here!
 
-For example, we would see dirty data like (these data are fake, but you can tell how it generally looks like):
+For example, we would see dirty data like (these data are not real, but you can tell how it generally looks like):
 
 ```markdown
 ID    Exhibitions 
@@ -37,7 +37,7 @@ ID    Exhibitions
 
 Some exhibitions have a format as $$location \rightarrow museum \rightarrow date$$ 
 while some of them has a format as $$museum \rightarrow exhibition title \rightarrow date$$ 
-Moreover, many objects (artwork) are matched (exhibited) to more than one exhibitions, which is pretty common in the art world as museums often borrow artworks from each other. So in the data, we would see each object have been exhibited in multiple museums and have all records in a same block, like shown object 2. Such situation makes the matching work harder than usual. So we need to separate and clean each strings first before working on specific exhibition title or date.
+Moreover, many objects (artwork) are matched (exhibited) to more than one exhibition, which is pretty common in the art world as museums often borrow artworks from each other. So in the data, we would see each object has been exhibited in multiple museums and have all records in the same block like shown in object 2. Such a situation makes the matching work harder than usual. So we need to separate and clean each string first before working on a specific exhibition title or date.
 
 We have found a general pattern: most exhibition records have a `\\n` between them in each string. R package `stringr` is pretty helpful while we are working with dirty data. For example, we split these chucked strings according to the pattern `\\n`. 
 
@@ -47,10 +47,11 @@ ExhHistory <- ExhHistory %>% mutate(ExhHistoryTextReader = str_split(Exhibitions
 ExhHistory <- ExhHistory %>% filter(ExhHistoryTextReader!='')
 ```
 
-Then it comes to the fun part, read and find the exact date and exhibition museums from the string, in order to compare and match with data in the Mia api collection. As I mentioned before, dates are in different formats, and we have seen:
+Then it comes to the fun part, read and find the exact date and exhibition museums from the string, to compare and match with data in the Mia API collection. As I mentioned before, dates are in different formats, and we have seen:
 
 ```markdown
-# This is only a demo, not including all
+# this is only a demo, not including all data we have seen
+
 January 12, 1979 - July 6, 1983
 6/12/99 - 10/3/99
 Nov. 2003-Feb. 2004.
@@ -77,10 +78,10 @@ dateRegex7 <- paste0('(?<!no. )',YearRegex)
 
 ExhHistory$ExhHistoryDates <- str_extract_all(tolower(ExhHistory$ExhExtraText), pattern = paste0('(',dateRegex,')|(',dateRegex2,')|(',dateRegex3,')|(',dateRegex4,')|(',dateRegex5,')|(',dateRegex6,')|(',dateRegex7,')'), simplify = FALSE)
 ```
+After all, we can extract almost all dates based on their patterns using regular expression. And we have found a useful website to check if we get the correct regular expression: https://regex101.com/ 
 
-After all, we are able to extract almost all date based on their patterns using regular expression. And we have found a useful website to check if we get the right regular expression: https://regex101.com/
+One of the most essential reflections I have after working with dirty: import clean date!
 
-One of the most essential reflection I have after working with dirty: import clean date!
 
 Now, I have made some progress in cleaning dirty data in R:
 
