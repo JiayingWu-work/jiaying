@@ -25,7 +25,7 @@ In September 2019, Mia wrote "Mia Collection Development Plan 2020" for 2020 and
 
 To quantitatively evaluate their progress, Prof. Brianna and I met with Mia's data team and talked about making visualizations for each department at Mia to check the growth or trend in their collections. We made pretty simple ones in the beginning to check if visualizations work better for them compared with traditional tabled data. 
 
-For example, as the graph shown below, to evaluate if department A has increased their certain material types' or object types' collections recently, we could generate one visualization like this:
+Note, in Mia's case, `Classification` means broad groupings based on material, object type, origin, use or function, e.g. Horology, Ceramics, Judaica, Tools & Equipment, etc. So, for example, to evaluate if department A has increased their certain Ceramics types' collections or Tools & Equipment types' collections recently, we could generate one visualization using the code below. 
 
 
 ```{r echo=FALSE,warning=FALSE,message=FALSE}
@@ -52,16 +52,9 @@ department.A.2015.2020 %>%
   theme_classic() 
 ```
 
+The visualization gives Mia a general idea of how certain material types' collections increases or decrease during the year 2015 to 2020. With the different continents being colored differently, Mia also get a sense of how many pieces have been collected from continent A. Or they can tell how many pieces have been collected from continent B at a certain year compared to a year before. 
 
-```{r echo=FALSE,warning=FALSE,message=FALSE}
-department.AAA.2015.2020 %>% 
-  filter(Classification.Accessories == TRUE | Classification.Woodwork == TRUE) %>%
-  ggplot(mapping = aes(x = AccessionISODate, fill = continent)) + 
-  geom_histogram(binwidth = 50) +
-  xlab("Accession Date") +
-  theme_classic() +
-  theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust = 1)) 
-```
+This visualization not only shows the general trend of Mia's collection but can also be used for specific cases. And it might be very useful and efficient in evaluating their collection plan, without going through each data by data. 
 
 What if we would like to check data for another two classification types? Then we just simply change the filters in the code. Here we go again:
 
@@ -74,16 +67,6 @@ department.A.2015.2020 %>%
 ```
 
 
-```{r echo=FALSE,warning=FALSE,message=FALSE}
-department.AAA.2015.2020 %>% 
-  filter(Classification.Prints == TRUE | Classification.Paintings == TRUE) %>%
-  ggplot(mapping = aes(x = AccessionISODate, fill = continent)) + 
-  geom_histogram(binwidth = 50) +
-  theme_classic() +
-  theme(axis.text.x = element_text(angle = 0, vjust = 1, hjust = 1)) +
-  xlab("Accession Date") 
-```
-
 The only difference between these two chunk of codes is this line: 
 
 ```
@@ -93,9 +76,8 @@ filter(Classification.Z == TRUE | Classification.W == TRUE)
 
 All other codes are identical and we only need to change the classification type each time. After a couple trying, we realized that we are able to code a general function in R to easily change some filters without unnecessary repetitions, and the demo for the function look like this:
 
-
 ```
-demoFunction <- function(StartDate,EndDate,Dept,Class){
+demoFunction <- function(StartDate,EndDate,Dept,Classification){
  
   fullData %>% 
     filter(department == Dept) %>%
@@ -108,34 +90,6 @@ demoFunction <- function(StartDate,EndDate,Dept,Class){
 }
 
 demoFunction("2015-01-01","2020-01-01","A", c("X", "Y", "Z", "W"))
-```
-
-
-```{r echo=FALSE,warning=FALSE,message=FALSE}
-Date.Classification.Continent <- function(StartDate,EndDate,Dept,Class){
-  
-  DEPT = case_when(Dept == 'AAA' ~ "Art of Africa and the Americas", 
-                   Dept == 'CA' ~ "Contemporary Art",
-                   Dept == 'CSSAA' ~ "Chinese, South and Southeast Asian Art",
-                   Dept == 'DATS' ~ "Decorative Arts, Textiles and Sculpture",
-                   Dept == 'JKA' ~ "Japanese and Korean Art",
-                   Dept == 'MAEP' ~ "Minnesota Artisblogts Exhibition Program",
-                   Dept == 'P' ~ "Paintings",
-                   Dept == 'PNM' ~ "Photography and New Media",
-                   Dept == 'PD' ~ "Prints and Drawings",
-                   Dept == 'T' ~ "Textiles")
- 
-  fullData %>% 
-    filter(department == DEPT) %>%
-    filter(AccessionISODate >= as.Date(StartDate), AccessionISODate <= as.Date(EndDate)) %>%
-    dplyr::filter(eval(parse(text=paste0(paste0('Classification.',str_replace_all(Class,' ','_')),collapse='|')) )) %>% 
-    ggplot(mapping = aes(x = AccessionISODate, fill = continent)) + 
-    geom_histogram(binwidth = as.numeric((as.Date(EndDate)-as.Date(StartDate))/30)) +  
-    scale_color_viridis_d() +
-    theme_classic()
-}
-
-Date.Classification.Continent("2015-01-01","2020-01-01","AAA", c("Accessories","Woodwork", "Prints", "Paintings"))
 ```
 
 It is still a function in process. But you got the idea. We are working on leaving more freedom to users to filter and choose the aspects they would like to focus on (color the graph). Hence, a Shiny App would be the best try.

@@ -37,7 +37,7 @@ Welcome to my website! I’m a rising junior at Macalester College with double m
 
 This summer, I am working on the Minneapolis Institute of Art’s collection data with [Professor Brianna C. Heggeseth](https://bcheggeseth.github.io/) from Macalester College. We plan to clean parts of the Minneapolis Institute of Art’s metadata and complete the exhibition data linking/matching project. Also, we will make some visualizations of Mia’s metadata in a shiny app.
 
-Outside of academics interests, I am passionate about cooking, nutrition and health. I have been working on building a healthy relationship with food since the pandemic, and explore potentials in blending traditional Suzhou cuisine (my hometown) with food all around the world.
+Outside of academics interests, I am passionate about cooking, nutrition and health. I have been working on building a healthy relationship with food since the pandemic, and exploring potentials in blending traditional Suzhou cuisine (my hometown) with food all around the world.
 
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "media/Jiaying_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
